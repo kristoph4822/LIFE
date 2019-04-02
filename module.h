@@ -12,7 +12,7 @@
 #define WIDTH 10
 #define HEIGHT 10
 #define N_GEN 10
-
+#define CELL_SIZE 8
 
 int x, y;
 

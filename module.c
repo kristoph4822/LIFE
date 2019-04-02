@@ -163,8 +163,8 @@ void write_png_file(char* file_name) {
 void process_file(int _width, int _height, int **array) {
   int w = (_width +2);
   int h = (_height +2);
-  width = w*8;
-  height = h*8;
+  width = w*CELL_SIZE;
+  height = h*CELL_SIZE;
   bit_depth = 8;
   color_type = PNG_COLOR_TYPE_GRAY;
   number_of_passes = 7;
@@ -175,14 +175,14 @@ void process_file(int _width, int _height, int **array) {
 
   for(int a =0; a < h; a++)
 	  for(int b = 0; b < w; b++){
-	            for (int i = 0; i<8;i++){
-			png_byte* row = row_pointers[a*8+i];
-			for (int j = 0; j < 8; j++){
+	            for (int i = 0; i<CELL_SIZE;i++){
+			png_byte* row = row_pointers[a*CELL_SIZE+i];
+			for (int j = 0; j < CELL_SIZE; j++){
 				if(array[a][b] == 0){
-		    	        	row[b*8+j] = 255;}
+		    	        	row[b*CELL_SIZE+j] = 255;}
 				else if(array[a][b] == 1){
-					row[b*8+j] = 100;}
-				else row[b*8+j] = 0;}
+					row[b*CELL_SIZE+j] = 100;}
+				else row[b*CELL_SIZE+j] = 0;}
 		    }
 	  }
 }		

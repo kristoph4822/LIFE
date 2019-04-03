@@ -13,15 +13,14 @@ int number_of_passes;
 png_bytep * row_pointers;
 */
 
-int** arrayCreator(char* in_file, int width, int height){
+int** arrayCreator(char* in_file, int w, int h){
 
 	FILE *in = fopen(in_file, "r");
 	if(!in){
-		fprintf(stderr,"Nie moĹĽna otworzyÄ‡ pliku do odczytu\n");
+		fprintf(stderr,"Nie mozna otworzyc pliku do odczytu\n");
 		exit(-2);
 	}
-	int h = height + 2;
-	int w = width + 2;
+
 	int **x = (int**) malloc(h*sizeof(int*));
 	
 	for(int i=0; i< h;i++){
@@ -31,22 +30,22 @@ int** arrayCreator(char* in_file, int width, int height){
 	for(int i = 0; i < h; i++)
 		for(int j = 0; j < w ; j++){
 			if(i==0 || i==h-1 || j==0 || j==w-1) x[i][j] = 2;
+			//jeżeli pole tablicy leży na granicy, przypsiujemy mu wartość 2 (ramka)
 			else x[i][j] = 0;
+			//pola planszy(martwe komórki) mają wartość 0
 		}
 	
 	int tmp1, tmp2;
 	while (fscanf (in, "%d %d", &tmp1, &tmp2) == 2){
 		x[tmp1][tmp2] = 1;
+		//wczytujemy z pliku współrzędne żywych komórek i oznaczamy je wartością 1
 	}
 
 	fclose(in);
 	return x;
 }
 
-void print2screen (int** x, int width, int height){
-	
-	int h = height + 2;
-	int w = width + 2;
+void print2screen (int** x, int w, int h){
 	
 	printf("\n");
 	for(int i = 0; i<h; i++){
@@ -56,11 +55,9 @@ void print2screen (int** x, int width, int height){
 	}
 }
 
-void write2txt(int **x, char* outfile, int width, int height){
-	
-	int h = height+2;
-	int w = width+2;
-
+void write2txt(int **x, char* outfile, int w, int h){
+//wypisywanie do pliku konfiguracji żywych komórek w postaci ich współrzędnych
+//
 	FILE *out = fopen(outfile, "w");
 	if(!out){
 		fprintf(stderr,"Nie moĹĽna otworzyÄ‡ pliku do zapisu\n");
@@ -76,6 +73,8 @@ void write2txt(int **x, char* outfile, int width, int height){
 
 
 int MooreCnt(int** array, int i, int j){
+//liczenie sąsiadów (sąsidztwo Moore'a) komórki o współrzędnych (i,j)
+
 	int x = 0;
 	if(array[i][j+1] == 1) x++;
 	if(array[i][j-1] == 1) x++;
@@ -89,10 +88,7 @@ int MooreCnt(int** array, int i, int j){
 	return x;
 }
 
-int** generateNext(int** array, int height, int width){
-
-	int h = height+2;
-	int w = width+2;
+int** generateNext(int** array, int h, int w){
 
 	 int **x = (int**) malloc(h*sizeof(int*));
 
@@ -101,6 +97,7 @@ int** generateNext(int** array, int height, int width){
 					         
 	for(int i = 0; i<h; i++)
 		for(int j = 0; j<w;j++){
+			//zmiana stanu komórki w zależności od liczby sąsiadów i jej aktualnego stanu
 			if(array[i][j] == 1){
 				if(MooreCnt(array, i, j) != 2 && MooreCnt(array, i, j) != 3){
 					x[i][j] = 0;}
@@ -116,6 +113,8 @@ int** generateNext(int** array, int height, int width){
 
 
 void write_png_file(char* file_name) {
+//funkcja tworząca plik png
+
   FILE *fp = fopen(file_name, "wb");
   if (!fp)
     printf("[write_png_file] File %s could not be opened for writing", file_name);
@@ -160,11 +159,12 @@ void write_png_file(char* file_name) {
   fclose(fp);
 }
 
-void process_file(int _width, int _height, int **array) {
-  int w = (_width +2);
-  int h = (_height +2);
+void process_file(int w, int h, int **array) {
+//funkcja konfigurująca tablicę kolorów dla funkcji write_png_file
+
   width = w*CELL_SIZE;
-  height = h*CELL_SIZE;
+  height = h*CELL_SIZE;//szerokość i wysokość tablicy w pikselach
+  
   bit_depth = 8;
   color_type = PNG_COLOR_TYPE_GRAY;
   number_of_passes = 7;
@@ -186,4 +186,19 @@ void process_file(int _width, int _height, int **array) {
 		    }
 	  }
 }		
-    
+
+char* file_name(int i){
+	
+	char* fname = malloc(sizeof(char)*9);
+        fname[0] = 'g';
+        fname[1] = 'e';
+        fname[2] = 'n';
+        fname[3] = i + 65;
+        fname[4] = '.';
+        fname[5] = 'p';
+        fname[6] = 'n';
+        fname[7] = 'g';
+	fname[8] = '\0';
+
+	return fname;
+}

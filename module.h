@@ -12,7 +12,7 @@
 #define WIDTH 10
 #define HEIGHT 10
 #define N_GEN 10
-#define CELL_SIZE 8
+#define CELL_SIZE 16
 
 int x, y;
 
@@ -38,5 +38,7 @@ int** generateNext(int** array, int height, int width);
 void write_png_file(char* file_name);
 
 void process_file(int width, int height, int **array);  
+
+char* file_name(int i);
 
 #endif

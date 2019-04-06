@@ -6,12 +6,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
+#include <ctype.h>
 
 #include <png.h>
 
 #define WIDTH 10
 #define HEIGHT 10
 #define N_GEN 10
+#define N_PICS 2
 #define CELL_SIZE 16
 
 int x, y;
@@ -24,6 +26,8 @@ png_structp png_ptr;
 png_infop info_ptr;
 int number_of_passes;
 png_bytep * row_pointers;
+
+void search4args(int args, char** argv, int* w, int* h, char** inf, char** outf, int* n_gen, int *p);
 
 int** arrayCreator(char* in_file, int width, int height);
 			

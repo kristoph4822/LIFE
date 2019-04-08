@@ -1,6 +1,4 @@
 ﻿#include "pngCreator.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void write_png_file(char* file_name) {
 //funkcja tworząca plik png

@@ -1,13 +1,10 @@
 ﻿#include "arrayCreator.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
 int** arrayCreator(char* in_file, int w, int h){
 
 	FILE *in = fopen(in_file, "r");
 	if(!in){
-		fprintf(stderr,"Nie mozna otworzyc pliku do odczytu\n");
+		fprintf(stderr,"Blad - nie mozna otworzyc pliku do odczytu\n");
 		exit(-2);
 	}
 
@@ -27,7 +24,7 @@ int** arrayCreator(char* in_file, int w, int h){
 	int tmp1, tmp2;
 	while (fscanf (in, "%d %d", &tmp1, &tmp2) == 2){
 		if(tmp1 >= h || tmp2 >= w){
-			fprintf(stderr, "Wspolrzedne punktow w pliku nie zgadzaja sie z wymiarami tablicy!\n");
+			fprintf(stderr, "Blad - wspolrzedne punktow w pliku nie zgadzaja sie z wymiarami tablicy\n");
 			exit(-3);
 		}
 		x[tmp1][tmp2] = 1;

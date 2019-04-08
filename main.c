@@ -12,9 +12,6 @@ int main (int argc, char **argv){
 	search4args(argc, argv, &width, &height, &in_file, &out_file, &n_gen, &n_pics);
 
 	int** array = arrayCreator(in_file, width, height);
-
-	printf("\nPierwsza generacja");
-	print2screen(array, width, height);
 	
 	int i = 0;
 	int j = 0;
@@ -32,9 +29,9 @@ int main (int argc, char **argv){
 
 	}
 
-	printf("\nOstatnia generacja");
-	print2screen(array, width, height);
-	write2txt(array, out_file, width, height);
+	if (out_file != NULL){
+	write2txt(array, out_file, width, height);}
+	
 	process_file(width, height, array);
 	write_png_file(file_name(j));
 

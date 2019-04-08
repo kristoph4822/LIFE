@@ -47,6 +47,8 @@ void search4args(int args, char** argv, int* w, int* h, char** inf, char** outf,
         }
 
 	if(*p > 26){
+	width+=2;
+	width+=2;
                 printf("Maksymalna liczba plików PNG to 26!\nPrzyjmuje wartosc domyslna liczby PNG: %d\n", N_PICS);
                 *p = N_PICS;
         }

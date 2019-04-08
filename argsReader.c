@@ -11,7 +11,6 @@ void search4args(int args, char** argv, int* w, int* h, char** inf, char** outf,
                 *h = HEIGHT;
                 *n = N_GEN;
 		*p = N_PICS;
-
 		for(int i = 0; i< args-1; i++){
 			if(strcmp(argv[i],"--w") == 0)
 				       *w = atoi(argv[i+1]);

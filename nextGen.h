@@ -3,4 +3,6 @@
 
 int MooreCnt(int** array, int i, int j);
 
+int takeAction(int status, int neighbours);
+
 #endif

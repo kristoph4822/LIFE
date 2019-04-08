@@ -1,9 +1,4 @@
 #include "argsReader.h"
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>
-
 
 void search4args(int args, char** argv, int* w, int* h, char** inf, char** outf, int* n, int* p){
 	

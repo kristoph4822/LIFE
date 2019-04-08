@@ -1,6 +1,4 @@
 #include "txtCreator.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void print2screen (int** x, int w, int h){
 	

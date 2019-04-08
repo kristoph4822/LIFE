@@ -1,8 +1,5 @@
 ﻿#include "arrayCreator.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
 int** arrayCreator(char* in_file, int w, int h){
 
 	FILE *in = fopen(in_file, "r");

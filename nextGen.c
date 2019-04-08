@@ -16,3 +16,15 @@ int MooreCnt(int** array, int i, int j){
 	return x;
 }
 
+int takeAction(int status, int neighbours){
+
+        if(status == 1){
+                if(neighbours != 2 && neighbours != 3){
+                        return 0;}
+                else return 1;}
+        else {
+                if(neighbours == 3){
+                        return 1;}
+                else return 0;}
+}
+

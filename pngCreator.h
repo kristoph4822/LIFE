@@ -2,6 +2,9 @@
 #define PNGCREATOR_H
 
 #include <png.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #define CELL_SIZE 16
 
 int x, y;

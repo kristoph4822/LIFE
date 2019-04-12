@@ -51,15 +51,15 @@ void search4args(int args, char** argv, int* w, int* h, char** inf, char** outf,
                 *p = N_PICS;
         }
 
+	if(*p > *n){
+                printf("Nie mozna wygenerowac wiecej plików PNG niz generacji - przyjmuje liczbe PNG rowna liczbie generacji: %d\n", *n);
+                *p = *n;
+        }
+
 	if(*p > 26){
                 printf("Maksymalna liczba plików PNG to 26! - przyjmuje wartosc domyslna liczby PNG: %d\n", N_PICS);
                 *p = N_PICS;
         }
-
-	if(*p > *n){
-		printf("Nie mozna wygenerowac wiecej plików PNG niz generacji - przyjmuje liczbe PNG rowna liczbie generacji: %d\n", *n);
-		*p = *n;
-	}
 
 	if(*inf == NULL){
 		fprintf(stderr, "Blad - nie podano pliku do odczytu pierwszej generacji\n");

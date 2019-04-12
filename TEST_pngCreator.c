@@ -1,6 +1,6 @@
 #include "pngCreator.h"
 #include "arrayCreator.h"
-#include "module.h"
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -13,7 +13,7 @@ char *in = "TEST_arrayCreator";
 int** array = arrayCreator(in, width, height);
 
 process_file(width, height, array);
-write_png_file(file_name(j));
+write_png_file(file_name(1));
 
 
 return 0;

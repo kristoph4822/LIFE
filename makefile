@@ -7,3 +7,5 @@ all:
 	cc genGenerator.c -c
 	cc main.c arrayCreator.o pngCreator.o txtCreator.o argsReader.o genGenerator.o  nextGen.o -lpng
 	
+pngCreator test:
+	cc TEST_pngCreator.c arrayCreator.o pngCreator.o -lpng
